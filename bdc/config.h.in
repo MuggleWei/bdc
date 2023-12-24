@@ -1,0 +1,16 @@
+/******************************************************************************
+ *  @file         config.h.in
+ *  @author       Muggle Wei
+ *  @email        mugglewei@gmail.com
+ *  @date         2023-12-24
+ *  @license      LGPL-v3
+ *  @brief        bdc config in
+ *****************************************************************************/
+
+#ifndef BDC_CONFIG_H_
+#define BDC_CONFIG_H_
+
+#cmakedefine BDC_VERSION "@BDC_VERSION@"
+#cmakedefine BDC_USE_DLL
+
+#endif // !BDC_CONFIG_H_
