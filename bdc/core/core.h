@@ -14,5 +14,10 @@
 #include "bdc/core/macro.h"
 #include "bdc/core/version.h"
 #include "bdc/core/handle.h"
+#include "bdc/core/log.h"
+#include "bdc/core/utils.h"
+#include "bdc/core/checker.h"
+
+#include "bdc/core/command/cmd_gen.h"
 
 #endif // !BDC_CORE_CORE_H_

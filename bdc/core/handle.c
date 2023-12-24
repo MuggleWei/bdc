@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "bdc/core/version.h"
+#include "bdc/core/command/cmd_gen.h"
 
 static const char *s_str_usage =
 	"Usage: %s COMMAND [OPTIONS]\n"
@@ -33,7 +34,9 @@ int bdc_cli_run(int argc, char **argv)
 		exit(EXIT_SUCCESS);
 	}
 
-	// TODO:
+	if (strcmp(argv[1], "gen") == 0) {
+		return bdc_cli_run_cmd_gen(argc - 1, argv + 1);
+	}
 
 	return 0;
 }

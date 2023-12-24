@@ -2,7 +2,7 @@
 #include "muggle/c/muggle_c.h"
 
 static char s_compile_dt_buf[32];
-static void init_compile_datetime_once()
+static void bdc_init_compile_datetime_once()
 {
 	memset((void *)s_compile_dt_buf, 0, sizeof(s_compile_dt_buf));
 	const char *compile_time = bdc_compile_datetime();
@@ -55,6 +55,6 @@ const char *bdc_compile_datetime()
 static muggle_once_flag s_flag = MUGGLE_ONCE_FLAG_INIT;
 const char *bdc_compile_datetime_iso8601()
 {
-	muggle_call_once(&s_flag, init_compile_datetime_once);
+	muggle_call_once(&s_flag, bdc_init_compile_datetime_once);
 	return s_compile_dt_buf;
 }
