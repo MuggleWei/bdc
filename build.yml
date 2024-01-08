@@ -2,7 +2,7 @@ name: bdc
 variables:
   - build_type: release
   - bdc_tag: v0.0.1
-  - mugglec_tag: v1.4.4
+  - mugglec_tag: v1.5.2
   - openssl_tag: openssl-3.1.4
   - libxml2_tag: v2.12.3
   - unity_tag: v2.5.2

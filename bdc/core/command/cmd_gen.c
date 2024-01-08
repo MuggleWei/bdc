@@ -23,7 +23,7 @@ static int parse_args_cmd_gen(int argc, char **argv, cmd_gen_args_t *args)
 	while (1) {
 		int option_index = 0;
 		static struct option long_options[] = {
-			{ "help", required_argument, NULL, 'h' },
+			{ "help", no_argument, NULL, 'h' },
 			{ "name", required_argument, NULL, 'n' },
 			{ "config", required_argument, NULL, 'c' },
 			{ "path", required_argument, NULL, 'p' },
