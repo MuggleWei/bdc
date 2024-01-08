@@ -4,7 +4,7 @@
  *  @email        mugglewei@gmail.com
  *  @date         2023-12-24
  *  @license      LGPL-v3
- *  @brief        bdc macro
+ *  @brief        bdc client
  *****************************************************************************/
 
 #ifndef BDC_CORE_CLIENT_H_

@@ -172,3 +172,63 @@ install(TARGETS ${bdc_core} ${bdc_cli}
 	RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
 	ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 	LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+
+################################
+# tests
+################################
+
+function(add_unittest name folder)
+	message("add unittest ${name} ${folder}")
+
+	set(name test_${name})
+
+	file(GLOB_RECURSE tmp_h ${folder}/*.h)
+	file(GLOB_RECURSE tmp_c ${folder}/*.c)
+	file(GLOB_RECURSE tmp_cpp ${folder}/*.cpp)
+	file(GLOB_RECURSE tmp_cc ${folder}/*.cc)
+
+	if (MSVC OR MINGW)
+		add_executable(${name} ${tmp_h} ${tmp_c} ${tmp_cpp} ${tmp_cc})
+		set_target_properties(${name}
+			PROPERTIES
+			FOLDER "example"
+			VS_DEBUGGER_WORKING_DIRECTORY "$(OutDir)"
+		)
+	else()
+		add_executable(${name} ${tmp_c} ${tmp_cpp} ${tmp_cc})
+		if (APPLE)
+			set_target_properties(${name}
+				PROPERTIES
+				INSTALL_RPATH "@executable_path/../lib"
+			)
+		elseif (UNIX)
+			set_target_properties(${name}
+				PROPERTIES
+				INSTALL_RPATH "\$ORIGIN/../lib"
+			)
+		endif()
+	endif(MSVC OR MINGW)
+
+	if ((${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU") OR
+		(${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang"))
+		target_compile_options(${name} PUBLIC -save-temps=obj)
+	endif()
+
+	add_dependencies(${name} ${bdc_core})
+	target_link_libraries(${name} PUBLIC ${bdc_core} unity::framework)
+
+	add_test(NAME ${name} COMMAND ${name})
+endfunction()
+
+if (BUILD_TESTING)
+	#enable_testing()
+	include(CTest)
+
+	set(test_root_dir ${CMAKE_CURRENT_LIST_DIR}/test)
+	FILE(GLOB subdirs RELATIVE ${test_root_dir} ${test_root_dir}/*)
+	FOREACH(subdir ${subdirs})
+		IF(IS_DIRECTORY ${test_root_dir}/${subdir})
+			add_unittest(${subdir} ${test_root_dir}/${subdir})
+		ENDIF()
+	ENDFOREACH()
+endif()

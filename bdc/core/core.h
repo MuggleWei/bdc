@@ -16,7 +16,10 @@
 #include "bdc/core/client.h"
 #include "bdc/core/log.h"
 #include "bdc/core/utils.h"
+#include "bdc/core/hash_table.h"
 #include "bdc/core/checker.h"
+#include "bdc/core/meta.h"
+#include "bdc/core/handle.h"
 
 #include "bdc/core/command/cmd_gen.h"
 
